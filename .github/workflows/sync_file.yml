@@ -1,0 +1,30 @@
+name: Sync File to Another Repo
+
+on:
+  push:
+    paths:
+      - GPRO-Public-API.yml
+
+jobs:
+  sync-file:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout source repository
+        uses: actions/checkout@v4
+
+      - name: Clone destination repository
+        env:
+          DEST_REPO_TOKEN: ${{ secrets.MARFLOCARO_GPRO_API }}
+        run: |
+          git clone https://$DEST_REPO_TOKEN@github.com/MarFloCaro/GPRO-API.git
+          cp ../../GPRO-Public-API.yml GPRO-API/
+          cd GPRO-API
+          git config --global user.email "purplewitchcodes@gmail.com"
+          git config --global user.name "PurpleWitch1980"
+          git add .
+          git commit -m "Update file from source repo"
+          git clone https://$DEST_REPO_TOKEN@github.com/MarFloCaro/GPRO-API.git
+
+      - name: Clean up
+        run: rm -rf other-repo
