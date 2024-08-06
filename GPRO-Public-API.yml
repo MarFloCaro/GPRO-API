@@ -687,8 +687,8 @@ paths:
       description: |
         Retrieve Race Analysis data.
         - If called without the query parameter, it'll return most recent available race analysis.
-          - `Beware that managers with several seasons experience and many races as supporters take considerable time to get a response back using this option.`
-        - Otherwise, it returns the specified race analysis.
+          - `Beware that managers with several seasons experience and many races as supporters MAY sometimes take considerable time to get a response back using this option, so it's recommeneded the query parameter is used`
+        - Otherwise, it returns the race analysis corresponding to the query parameter.
       security:
         - Bearer: []
       parameters:
