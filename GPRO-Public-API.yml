@@ -121,6 +121,39 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/LoggedOut'
+  /{lang}/backend/api/v2/CCPHistory:
+    parameters:
+      - $ref: '#/components/parameters/Lang'
+    get:
+      tags: 
+        - Manager Resources
+      operationId: GetCCPsHistory
+      description: |
+        Obtain the CCPs History
+        - If no parameters are used, it defaults to current season.
+        - If `season` parameter provided is invalid, it returns an empty data array.
+        - If the user is not a supporter, it returns an error message within the 200 response.
+      security:
+        - Bearer: []
+      parameters:
+        - $ref: '#/components/parameters/Season'
+      responses:
+        '200':
+          description: CCPs History Response
+          x-summary: CCPs History Response
+          content:
+            application/json:
+              schema:
+                oneOf:
+                  - $ref: '#/components/schemas/CCPsHistoryResponse'
+                  - $ref: '#/components/schemas/CCPsNonSupResponse'
+        '401':
+          description: CCPs History Error
+          x-summary: CCPs History Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LoggedOut'
   /{lang}/backend/api/v2/Practice:
     parameters:
       - $ref: '#/components/parameters/Lang'
@@ -1038,39 +1071,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/LoggedOut'  
-  /{lang}/backend/api/v2/CCPHistory:
-    parameters:
-      - $ref: '#/components/parameters/Lang'
-    get:
-      tags: 
-        - Manager Resources
-      operationId: GetCCPsHistory
-      description: |
-        Obtain the CCPs History
-        - If no parameters are used, it defaults to current season.
-        - If `season` parameter provided is invalid, it returns an empty data array.
-        - If the user is not a supporter, it returns an error message within the 200 response.
-      security:
-        - Bearer: []
-      parameters:
-        - $ref: '#/components/parameters/Season'
-      responses:
-        '200':
-          description: CCPs History Response
-          x-summary: CCPs History Response
-          content:
-            application/json:
-              schema:
-                oneOf:
-                  - $ref: '#/components/schemas/CCPsHistoryResponse'
-                  - $ref: '#/components/schemas/CCPsNonSupResponse'
-        '401':
-          description: CCPs History Error
-          x-summary: CCPs History Error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/LoggedOut'    
+
 
 
 components:
@@ -75143,6 +75144,321 @@ components:
           - name: Rookie - 149
           - name: Rookie - 150
           apiRequestsRemaining: 99
+      CCPsHistoryResponse:
+        type: object
+        properties:
+          loadingDataState:
+            type: integer
+          minSeason:
+            type: integer
+          maxSeason:
+            type: integer
+          selSeason:
+            type: integer
+          data:
+            type: array
+            items:
+              type: object
+              properties:
+                race:
+                  type: integer
+                power:
+                  type: integer
+                powerChange:
+                  type: string
+                handl:
+                  type: integer
+                handlChange:
+                  type: string
+                accel:
+                  type: integer
+                accelChange:
+                  type: string
+                tPower:
+                  type: integer
+                tPowerChange:
+                  type: string
+                tHandl:
+                  type: integer
+                tHandlChange:
+                  type: string
+                tAccel:
+                  type: integer
+                tAccelChange:
+                  type: string
+                testLaps:
+                  type: integer
+          apiRequestsRemaining:
+            type: integer
+        example:
+          loadingDataState: 1
+          minSeason: 89
+          maxSeason: 100
+          selSeason: 99
+          data:
+          - race: 17
+            power: 78
+            powerChange: '4'
+            handl: 81
+            handlChange: '-3'
+            accel: 89
+            accelChange: '13'
+            tPower: 20
+            tPowerChange: '-1'
+            tHandl: 17
+            tHandlChange: '-1'
+            tAccel: 20
+            tAccelChange: '-1'
+            testLaps: 0
+          - race: 16
+            power: 74
+            powerChange: '-4'
+            handl: 84
+            handlChange: '-1'
+            accel: 76
+            accelChange: '-5'
+            tPower: 21
+            tPowerChange: '-1'
+            tHandl: 18
+            tHandlChange: '-1'
+            tAccel: 21
+            tAccelChange: '-1'
+            testLaps: 0
+          - race: 15
+            power: 78
+            powerChange: '-5'
+            handl: 85
+            handlChange: '1'
+            accel: 81
+            accelChange: '0'
+            tPower: 22
+            tPowerChange: '-1'
+            tHandl: 19
+            tHandlChange: '0'
+            tAccel: 22
+            tAccelChange: '5'
+            testLaps: 0
+          - race: 14
+            power: 83
+            powerChange: '1'
+            handl: 84
+            handlChange: '5'
+            accel: 81
+            accelChange: '2'
+            tPower: 23
+            tPowerChange: '5'
+            tHandl: 19
+            tHandlChange: '0'
+            tAccel: 17
+            tAccelChange: '0'
+            testLaps: 0
+          - race: 13
+            power: 82
+            powerChange: '3'
+            handl: 79
+            handlChange: '3'
+            accel: 79
+            accelChange: '4'
+            tPower: 18
+            tPowerChange: '-1'
+            tHandl: 19
+            tHandlChange: '-1'
+            tAccel: 17
+            tAccelChange: '-1'
+            testLaps: 99
+          - race: 12
+            power: 79
+            powerChange: '-8'
+            handl: 76
+            handlChange: '2'
+            accel: 75
+            accelChange: '-3'
+            tPower: 19
+            tPowerChange: '-1'
+            tHandl: 20
+            tHandlChange: '-2'
+            tAccel: 18
+            tAccelChange: '-1'
+            testLaps: 100
+          - race: 11
+            power: 87
+            powerChange: '0'
+            handl: 74
+            handlChange: '-1'
+            accel: 78
+            accelChange: '0'
+            tPower: 20
+            tPowerChange: '0'
+            tHandl: 22
+            tHandlChange: '0'
+            tAccel: 19
+            tAccelChange: '5'
+            testLaps: 0
+          - race: 10
+            power: 87
+            powerChange: '5'
+            handl: 75
+            handlChange: '-2'
+            accel: 78
+            accelChange: '0'
+            tPower: 20
+            tPowerChange: '-1'
+            tHandl: 22
+            tHandlChange: '5'
+            tAccel: 14
+            tAccelChange: '1'
+            testLaps: 0
+          - race: 9
+            power: 82
+            powerChange: '3'
+            handl: 77
+            handlChange: '1'
+            accel: 78
+            accelChange: '5'
+            tPower: 21
+            tPowerChange: '-1'
+            tHandl: 17
+            tHandlChange: '-1'
+            tAccel: 13
+            tAccelChange: '-1'
+            testLaps: 100
+          - race: 8
+            power: 79
+            powerChange: '5'
+            handl: 76
+            handlChange: '1'
+            accel: 73
+            accelChange: '1'
+            tPower: 22
+            tPowerChange: '-1'
+            tHandl: 18
+            tHandlChange: '-1'
+            tAccel: 14
+            tAccelChange: '-1'
+            testLaps: 100
+          - race: 7
+            power: 74
+            powerChange: '0'
+            handl: 75
+            handlChange: '-5'
+            accel: 72
+            accelChange: '-2'
+            tPower: 23
+            tPowerChange: '-1'
+            tHandl: 19
+            tHandlChange: '-1'
+            tAccel: 15
+            tAccelChange: '-1'
+            testLaps: 0
+          - race: 6
+            power: 74
+            powerChange: '3'
+            handl: 80
+            handlChange: '-1'
+            accel: 74
+            accelChange: '3'
+            tPower: 24
+            tPowerChange: '4'
+            tHandl: 20
+            tHandlChange: '-1'
+            tAccel: 16
+            tAccelChange: '0'
+            testLaps: 0
+          - race: 5
+            power: 71
+            powerChange: '1'
+            handl: 81
+            handlChange: '2'
+            accel: 71
+            accelChange: '2'
+            tPower: 20
+            tPowerChange: '-1'
+            tHandl: 21
+            tHandlChange: '-1'
+            tAccel: 16
+            tAccelChange: '-1'
+            testLaps: 0
+          - race: 4
+            power: 70
+            powerChange: '-3'
+            handl: 79
+            handlChange: '4'
+            accel: 69
+            accelChange: '1'
+            tPower: 21
+            tPowerChange: '-1'
+            tHandl: 22
+            tHandlChange: '0'
+            tAccel: 17
+            tAccelChange: '8'
+            testLaps: 100
+          - race: 3
+            power: 73
+            powerChange: '0'
+            handl: 75
+            handlChange: '0'
+            accel: 68
+            accelChange: '0'
+            tPower: 22
+            tPowerChange: '0'
+            tHandl: 22
+            tHandlChange: '4'
+            tAccel: 9
+            tAccelChange: '0'
+            testLaps: 0
+          - race: 2
+            power: 73
+            powerChange: '0'
+            handl: 75
+            handlChange: '-1'
+            accel: 68
+            accelChange: '0'
+            tPower: 22
+            tPowerChange: '4'
+            tHandl: 18
+            tHandlChange: '0'
+            tAccel: 9
+            tAccelChange: '1'
+            testLaps: 100
+          - race: 1
+            power: 73
+            powerChange: '0'
+            handl: 76
+            handlChange: '0'
+            accel: 68
+            accelChange: '0'
+            tPower: 18
+            tPowerChange: '-1'
+            tHandl: 18
+            tHandlChange: '-1'
+            tAccel: 8
+            tAccelChange: '0'
+            testLaps: 100
+          apiRequestsRemaining: 984
+      CCPsNonSupResponse:
+        type: object
+        properties:
+          loadingDataState:
+            type: integer
+          data:
+            type: array
+            items:
+              type: string
+          minSeason:
+            type: integer
+          maxSeason:
+            type: integer
+          errorMsg:
+            type: string
+          apiRequestsRemaining:
+            type: integer
+        example:
+          loadingDataState: 1
+          data: []
+          minSeason': 86
+          maxSeason': 100
+          errorMsg': 'This feature is available only to GPRO supporters'
+          apiRequestsRemaining': 97
       RaceSummaryResponse:
         type: object
         properties:
@@ -86529,319 +86845,4 @@ components:
             natCode: au
           cutoffTime112percent: 12:03.883
           apiRequestsRemaining: 99
-      CCPsHistoryResponse:
-        type: object
-        properties:
-          loadingDataState:
-            type: integer
-          minSeason:
-            type: integer
-          maxSeason:
-            type: integer
-          selSeason:
-            type: integer
-          data:
-            type: array
-            items:
-              type: object
-              properties:
-                race:
-                  type: integer
-                power:
-                  type: integer
-                powerChange:
-                  type: string
-                handl:
-                  type: integer
-                handlChange:
-                  type: string
-                accel:
-                  type: integer
-                accelChange:
-                  type: string
-                tPower:
-                  type: integer
-                tPowerChange:
-                  type: string
-                tHandl:
-                  type: integer
-                tHandlChange:
-                  type: string
-                tAccel:
-                  type: integer
-                tAccelChange:
-                  type: string
-                testLaps:
-                  type: integer
-          apiRequestsRemaining:
-            type: integer
-        example:
-          loadingDataState: 1
-          minSeason: 89
-          maxSeason: 100
-          selSeason: 99
-          data:
-          - race: 17
-            power: 78
-            powerChange: '4'
-            handl: 81
-            handlChange: '-3'
-            accel: 89
-            accelChange: '13'
-            tPower: 20
-            tPowerChange: '-1'
-            tHandl: 17
-            tHandlChange: '-1'
-            tAccel: 20
-            tAccelChange: '-1'
-            testLaps: 0
-          - race: 16
-            power: 74
-            powerChange: '-4'
-            handl: 84
-            handlChange: '-1'
-            accel: 76
-            accelChange: '-5'
-            tPower: 21
-            tPowerChange: '-1'
-            tHandl: 18
-            tHandlChange: '-1'
-            tAccel: 21
-            tAccelChange: '-1'
-            testLaps: 0
-          - race: 15
-            power: 78
-            powerChange: '-5'
-            handl: 85
-            handlChange: '1'
-            accel: 81
-            accelChange: '0'
-            tPower: 22
-            tPowerChange: '-1'
-            tHandl: 19
-            tHandlChange: '0'
-            tAccel: 22
-            tAccelChange: '5'
-            testLaps: 0
-          - race: 14
-            power: 83
-            powerChange: '1'
-            handl: 84
-            handlChange: '5'
-            accel: 81
-            accelChange: '2'
-            tPower: 23
-            tPowerChange: '5'
-            tHandl: 19
-            tHandlChange: '0'
-            tAccel: 17
-            tAccelChange: '0'
-            testLaps: 0
-          - race: 13
-            power: 82
-            powerChange: '3'
-            handl: 79
-            handlChange: '3'
-            accel: 79
-            accelChange: '4'
-            tPower: 18
-            tPowerChange: '-1'
-            tHandl: 19
-            tHandlChange: '-1'
-            tAccel: 17
-            tAccelChange: '-1'
-            testLaps: 99
-          - race: 12
-            power: 79
-            powerChange: '-8'
-            handl: 76
-            handlChange: '2'
-            accel: 75
-            accelChange: '-3'
-            tPower: 19
-            tPowerChange: '-1'
-            tHandl: 20
-            tHandlChange: '-2'
-            tAccel: 18
-            tAccelChange: '-1'
-            testLaps: 100
-          - race: 11
-            power: 87
-            powerChange: '0'
-            handl: 74
-            handlChange: '-1'
-            accel: 78
-            accelChange: '0'
-            tPower: 20
-            tPowerChange: '0'
-            tHandl: 22
-            tHandlChange: '0'
-            tAccel: 19
-            tAccelChange: '5'
-            testLaps: 0
-          - race: 10
-            power: 87
-            powerChange: '5'
-            handl: 75
-            handlChange: '-2'
-            accel: 78
-            accelChange: '0'
-            tPower: 20
-            tPowerChange: '-1'
-            tHandl: 22
-            tHandlChange: '5'
-            tAccel: 14
-            tAccelChange: '1'
-            testLaps: 0
-          - race: 9
-            power: 82
-            powerChange: '3'
-            handl: 77
-            handlChange: '1'
-            accel: 78
-            accelChange: '5'
-            tPower: 21
-            tPowerChange: '-1'
-            tHandl: 17
-            tHandlChange: '-1'
-            tAccel: 13
-            tAccelChange: '-1'
-            testLaps: 100
-          - race: 8
-            power: 79
-            powerChange: '5'
-            handl: 76
-            handlChange: '1'
-            accel: 73
-            accelChange: '1'
-            tPower: 22
-            tPowerChange: '-1'
-            tHandl: 18
-            tHandlChange: '-1'
-            tAccel: 14
-            tAccelChange: '-1'
-            testLaps: 100
-          - race: 7
-            power: 74
-            powerChange: '0'
-            handl: 75
-            handlChange: '-5'
-            accel: 72
-            accelChange: '-2'
-            tPower: 23
-            tPowerChange: '-1'
-            tHandl: 19
-            tHandlChange: '-1'
-            tAccel: 15
-            tAccelChange: '-1'
-            testLaps: 0
-          - race: 6
-            power: 74
-            powerChange: '3'
-            handl: 80
-            handlChange: '-1'
-            accel: 74
-            accelChange: '3'
-            tPower: 24
-            tPowerChange: '4'
-            tHandl: 20
-            tHandlChange: '-1'
-            tAccel: 16
-            tAccelChange: '0'
-            testLaps: 0
-          - race: 5
-            power: 71
-            powerChange: '1'
-            handl: 81
-            handlChange: '2'
-            accel: 71
-            accelChange: '2'
-            tPower: 20
-            tPowerChange: '-1'
-            tHandl: 21
-            tHandlChange: '-1'
-            tAccel: 16
-            tAccelChange: '-1'
-            testLaps: 0
-          - race: 4
-            power: 70
-            powerChange: '-3'
-            handl: 79
-            handlChange: '4'
-            accel: 69
-            accelChange: '1'
-            tPower: 21
-            tPowerChange: '-1'
-            tHandl: 22
-            tHandlChange: '0'
-            tAccel: 17
-            tAccelChange: '8'
-            testLaps: 100
-          - race: 3
-            power: 73
-            powerChange: '0'
-            handl: 75
-            handlChange: '0'
-            accel: 68
-            accelChange: '0'
-            tPower: 22
-            tPowerChange: '0'
-            tHandl: 22
-            tHandlChange: '4'
-            tAccel: 9
-            tAccelChange: '0'
-            testLaps: 0
-          - race: 2
-            power: 73
-            powerChange: '0'
-            handl: 75
-            handlChange: '-1'
-            accel: 68
-            accelChange: '0'
-            tPower: 22
-            tPowerChange: '4'
-            tHandl: 18
-            tHandlChange: '0'
-            tAccel: 9
-            tAccelChange: '1'
-            testLaps: 100
-          - race: 1
-            power: 73
-            powerChange: '0'
-            handl: 76
-            handlChange: '0'
-            accel: 68
-            accelChange: '0'
-            tPower: 18
-            tPowerChange: '-1'
-            tHandl: 18
-            tHandlChange: '-1'
-            tAccel: 8
-            tAccelChange: '0'
-            testLaps: 100
-          apiRequestsRemaining: 984
-      CCPsNonSupResponse:
-        type: object
-        properties:
-          loadingDataState:
-            type: integer
-          data:
-            type: array
-            items:
-              type: string
-          minSeason:
-            type: integer
-          maxSeason:
-            type: integer
-          errorMsg:
-            type: string
-          apiRequestsRemaining:
-            type: integer
-        example:
-          loadingDataState: 1
-          data: []
-          minSeason': 86
-          maxSeason': 100
-          errorMsg': 'This feature is available only to GPRO supporters'
-          apiRequestsRemaining': 97
 
