@@ -1043,7 +1043,7 @@ paths:
       - $ref: '#/components/parameters/Lang'
     get:
       tags: 
-        - CCPs History
+        - Manager Resources
       operationId: GetCCPsHistory
       description: |
         Obtain the CCPs History
