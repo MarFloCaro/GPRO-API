@@ -86827,6 +86827,8 @@ components:
             type: integer
           data:
             type: array
+            items:
+              type: string
           minSeason:
             type: integer
           maxSeason:
