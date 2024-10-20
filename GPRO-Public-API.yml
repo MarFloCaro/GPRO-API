@@ -1696,7 +1696,7 @@ components:
         name: mode
         in: query
         description: Display mode for tracks endpoint
-        required: true
+        required: false
         schema:
           type: string
           enum: [calendar, nextcalendar]
