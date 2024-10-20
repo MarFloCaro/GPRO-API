@@ -236,9 +236,13 @@ paths:
       tags:
         - Tracks
       operationId: GetAllTracksPreview
-      description: Retrieving All Available Tracks' Preview Data.
+      description: |
+        Retrieve Tracks Preview Data.
+        - If mode parameter is not used in the request, it returns All Tracks.
       security:
         - Bearer: []  
+      parameters:
+        - $ref: '#/components/parameters/Mode'
       responses:
         '200':
           description: All tracks response
@@ -1688,6 +1692,16 @@ components:
         schema:
           type: integer
           example: 291
+      Mode:
+        name: mode
+        in: query
+        description: Display mode for tracks endpoint
+        required: true
+        schema:
+          type: string
+          enum: [calendar, nextcalendar]
+          example: calendar
+
 
     schemas:
 
@@ -7078,6 +7092,8 @@ components:
         properties:
           loadingDataState:
             type: string
+          nextSeasonPublished:
+            type: integer
           tracks:
             type: array
             items:
@@ -7109,6 +7125,7 @@ components:
             type: integer
         example:
           loadingDataState: '1'
+          nextSeasonPublished: true
           tracks:
           - id: 2
             name: Buenos Aires
@@ -7153,7 +7170,7 @@ components:
             handl: 15
             accel: 10
             category: F1
-            gpsHeld: 34
+            gpsHeld: 35
           - id: 12
             name: A1-Ring
             natCode: at
@@ -7164,7 +7181,7 @@ components:
             handl: 8
             accel: 9
             category: F1
-            gpsHeld: 25
+            gpsHeld: 27
           - id: 24
             name: Oesterreichring
             natCode: at
@@ -7186,7 +7203,7 @@ components:
             handl: 8
             accel: 16
             category: F1
-            gpsHeld: 20
+            gpsHeld: 21
           - id: 29
             name: Sakhir
             natCode: bh
@@ -7197,7 +7214,7 @@ components:
             handl: 11
             accel: 9
             category: F1
-            gpsHeld: 40
+            gpsHeld: 41
           - id: 10
             name: Spa
             natCode: be
@@ -7208,7 +7225,7 @@ components:
             handl: 16
             accel: 13
             category: F1
-            gpsHeld: 31
+            gpsHeld: 32
           - id: 26
             name: Zolder
             natCode: be
@@ -7241,7 +7258,7 @@ components:
             handl: 9
             accel: 10
             category: F1
-            gpsHeld: 33
+            gpsHeld: 34
           - id: 6
             name: Montreal
             natCode: ca
@@ -7252,7 +7269,7 @@ components:
             handl: 7
             accel: 13
             category: F1
-            gpsHeld: 43
+            gpsHeld: 44
           - id: 33
             name: Shanghai
             natCode: cn
@@ -7263,7 +7280,7 @@ components:
             handl: 16
             accel: 15
             category: F1
-            gpsHeld: 37
+            gpsHeld: 38
           - id: 59
             name: Grobnik
             natCode: hr
@@ -7329,7 +7346,7 @@ components:
             handl: 11
             accel: 8
             category: F1
-            gpsHeld: 34
+            gpsHeld: 35
           - id: 56
             name: Avus
             natCode: de
@@ -7362,7 +7379,7 @@ components:
             handl: 12
             accel: 13
             category: ex F1
-            gpsHeld: 27
+            gpsHeld: 28
           - id: 53
             name: Serres
             natCode: gr
@@ -7384,7 +7401,7 @@ components:
             handl: 10
             accel: 13
             category: F1
-            gpsHeld: 34
+            gpsHeld: 35
           - id: 43
             name: Irungattukottai
             natCode: in
@@ -7428,7 +7445,7 @@ components:
             handl: 12
             accel: 9
             category: F1
-            gpsHeld: 28
+            gpsHeld: 29
           - id: 28
             name: Mugello
             natCode: it
@@ -7439,7 +7456,7 @@ components:
             handl: 13
             accel: 12
             category: ex F1
-            gpsHeld: 25
+            gpsHeld: 26
           - id: 37
             name: Fuji
             natCode: jp
@@ -7461,7 +7478,7 @@ components:
             handl: 18
             accel: 13
             category: F1
-            gpsHeld: 41
+            gpsHeld: 42
           - id: 50
             name: Kaunas
             natCode: lt
@@ -7483,7 +7500,7 @@ components:
             handl: 11
             accel: 14
             category: ex F1
-            gpsHeld: 39
+            gpsHeld: 40
           - id: 22
             name: Mexico City
             natCode: mx
@@ -7505,7 +7522,7 @@ components:
             handl: 7
             accel: 12
             category: F1
-            gpsHeld: 48
+            gpsHeld: 49
           - id: 27
             name: Zandvoort
             natCode: nl
@@ -7516,7 +7533,7 @@ components:
             handl: 13
             accel: 9
             category: ex F1
-            gpsHeld: 25
+            gpsHeld: 26
           - id: 42
             name: Poznan
             natCode: pl
@@ -7538,7 +7555,7 @@ components:
             handl: 8
             accel: 14
             category: ex F1
-            gpsHeld: 29
+            gpsHeld: 30
           - id: 49
             name: Portimao
             natCode: pt
@@ -7615,7 +7632,7 @@ components:
             handl: 11
             accel: 17
             category: F1
-            gpsHeld: 37
+            gpsHeld: 38
           - id: 52
             name: Slovakiaring
             natCode: sk
@@ -7626,7 +7643,7 @@ components:
             handl: 10
             accel: 15
             category: non F1
-            gpsHeld: 17
+            gpsHeld: 18
           - id: 20
             name: Kyalami
             natCode: za
@@ -7670,7 +7687,7 @@ components:
             handl: 16
             accel: 8
             category: ex F1
-            gpsHeld: 21
+            gpsHeld: 22
           - id: 39
             name: Valencia
             natCode: es
@@ -7692,7 +7709,7 @@ components:
             handl: 11
             accel: 9
             category: ex F1
-            gpsHeld: 31
+            gpsHeld: 33
           - id: 57
             name: Bremgarten
             natCode: ch
@@ -7703,7 +7720,7 @@ components:
             handl: 26
             accel: 17
             category: ex F1
-            gpsHeld: 17
+            gpsHeld: 18
           - id: 36
             name: Istanbul
             natCode: tr
@@ -7736,7 +7753,7 @@ components:
             handl: 12
             accel: 8
             category: ex F1
-            gpsHeld: 29
+            gpsHeld: 30
           - id: 8
             name: Silverstone
             natCode: gb
@@ -7747,7 +7764,7 @@ components:
             handl: 11
             accel: 16
             category: F1
-            gpsHeld: 34
+            gpsHeld: 36
           - id: 51
             name: Austin
             natCode: us
@@ -7758,7 +7775,7 @@ components:
             handl: 18
             accel: 10
             category: F1
-            gpsHeld: 20
+            gpsHeld: 21
           - id: 16
             name: Indianapolis
             natCode: us
@@ -7769,7 +7786,7 @@ components:
             handl: 9
             accel: 11
             category: ex F1
-            gpsHeld: 24
+            gpsHeld: 25
           - id: 46
             name: Indianapolis Oval
             natCode: us
@@ -7791,7 +7808,7 @@ components:
             handl: 8
             accel: 7
             category: non F1
-            gpsHeld: 27
+            gpsHeld: 28
           - id: 64
             name: Las Vegas
             natCode: us
@@ -7814,7 +7831,7 @@ components:
             accel: 11
             category: F1
             gpsHeld: 4
-          apiRequestsRemaining: 99
+          apiRequestsRemaining: 995
       NegOverviewResponse:
         type: object
         properties:
