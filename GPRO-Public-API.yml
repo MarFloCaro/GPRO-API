@@ -8065,6 +8065,8 @@ components:
             type: integer
           groupsMatch:
             type: integer
+          originGroup:
+            type: string
           maxNegotiations:
             type: integer
           name:
@@ -8169,6 +8171,7 @@ components:
           sponsorId: 31012
           canNegotiate: 1
           groupsMatch: 1
+          originGroup: Amateur - 58
           maxNegotiations: 5
           name: J.P. Morning
           webSite: None
@@ -8254,6 +8257,8 @@ components:
             type: integer
           groupsMatch:
             type: integer
+          originGroup:
+            type: string
           maxNegotiations:
             type: integer
           name:
@@ -8342,6 +8347,7 @@ components:
           sponsorId: 31021
           canNegotiate: 1
           groupsMatch: 1
+          originGroup: Amateur - 58
           maxNegotiations: 5
           name: Orecla
           webSite: None
